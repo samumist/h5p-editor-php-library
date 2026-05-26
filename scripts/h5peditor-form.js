@@ -8,6 +8,7 @@ ns.Form = function (library, startLanguages, defaultLanguage) {
   this.params = {};
   this.passReadies = false;
   this.commonFields = {};
+  this.library = library;
 
   this.$form = ns.$('' +
     '<div class="h5peditor-form">' +
@@ -442,7 +443,7 @@ ns.Form.prototype.processSemantics = function (semantics, defaultParams, metadat
   this.params = (defaultParams.params ? defaultParams.params : defaultParams);
 
   // Create real children
-  ns.processSemanticsChunk(semantics, this.params, this.$form.children('.tree'), this);
+  ns.processSemanticsChunk(semantics, this.params, this.$form.children('.tree'), this, this.library);
 };
 
 /**

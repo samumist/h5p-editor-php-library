@@ -226,6 +226,10 @@ ns.loadLibrary = function (libraryName, callback) {
             languageSemantics = JSON.parse(libraryData.language).semantics;
             delete libraryData.language; // Avoid caching a lot of unused data
           }
+          // Use translations from server response if language is null but translations exist
+          else if (libraryData.translations && libraryData.translations[library.machineName]) {
+            languageSemantics = libraryData.translations[library.machineName].semantics;
+          }
           var semantics = ns.$.extend(true, [], libraryData.semantics, languageSemantics);
           if (libraryData.defaultLanguage !== null) {
             libraryData.translation[defaultLanguage] = JSON.parse(libraryData.defaultLanguage).semantics;
